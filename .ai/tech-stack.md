@@ -1,9 +1,8 @@
 Frontend - Astro z React dla komponentów interaktywnych:
 - Astro 5 pozwala na tworzenie szybkich, wydajnych stron i aplikacji z minimalną ilością JavaScript
-- Angular 19 zapewni interaktywność tam, gdzie jest potrzebna
+- React 18 zapewni interaktywność tam, gdzie jest potrzebna
 - TypeScript 5.5 dla statycznego typowania kodu i lepszego wsparcia IDE
 - Tailwind 4 pozwala na wygodne stylowanie aplikacji
-- Angular Material UI zapewnia bibliotekę dostępnych komponentów Angular, na których oprzemy UI
 
 Backend - Supabase jako kompleksowe rozwiązanie backendowe:
 - Zapewnia bazę danych PostgreSQL
