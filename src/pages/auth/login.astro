@@ -1,0 +1,45 @@
+---
+import React from 'react';
+import LoginForm from '../../components/auth/LoginForm';
+import AuthLayout from '../../components/auth/AuthLayout';
+---
+
+<AuthLayout title="Zaloguj się do Recipe Assistant" subtitle="Dostęp do spersonalizowanych przepisów">
+  <div client:load>
+    <div id="registered-notice" style="display:none" className="bg-green-50 text-green-700 px-4 py-3 rounded-lg text-sm mb-4">Sprawdź swoją skrzynkę pocztową i potwierdź konto, aby się zalogować.</div>
+    <script type="module">
+      const params = new URLSearchParams(window.location.search);
+      if (params.get('registered') === '1') {
+        const el = document.getElementById('registered-notice');
+        if (el) el.style.display = 'block';
+      }
+    </script>
+
+    <LoginForm onSubmit={async (payload) => {
+      try {
+        const res = await fetch('/api/auth/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+        });
+
+        const data = await res.json();
+        if (!res.ok) {
+          throw new Error(data?.error?.message || 'Nieprawidłowe dane');
+        }
+
+        // Save tokens in localStorage (per user choice)
+        if (data?.session?.access_token) localStorage.setItem('access_token', data.session.access_token);
+        if (data?.session?.refresh_token) localStorage.setItem('refresh_token', data.session.refresh_token);
+
+        // Redirect to returnTo or /account
+        const params = new URLSearchParams(window.location.search);
+        const returnTo = params.get('returnTo') || '/account';
+        window.location.href = returnTo;
+      } catch (err: any) {
+        // Let LoginForm display the error via thrown error
+        throw err;
+      }
+    }} onSwitchToRegister={() => { window.location.href = '/auth/register'; }} onForgot={() => { window.location.href = '/auth/forgot'; }} />
+  </div>
+</AuthLayout>

@@ -1,0 +1,15 @@
+---
+import React from 'react';
+import ResetPasswordForm from '../../components/auth/ResetPasswordForm';
+import AuthLayout from '../../components/auth/AuthLayout';
+
+const params = Astro.url.searchParams; // Note: Astro server-side pattern; we'll pass token to client via window
+const token = params.get('token') || params.get('access_token') || '';
+---
+
+<AuthLayout title="Zresetuj hasło" subtitle="Ustaw nowe hasło dla konta">
+  <div client:load>
+    <ResetPasswordForm token={""} onSubmit={(payload) => { console.log('Reset submit', payload); }} />
+  </div>
+</AuthLayout>
+

@@ -1,0 +1,32 @@
+---
+import React from 'react';
+import RegisterForm from '../../components/auth/RegisterForm';
+import AuthLayout from '../../components/auth/AuthLayout';
+---
+
+<AuthLayout title="Załóż konto" subtitle="Zarejestruj się, aby zapisać preferencje i przepisy">
+  <div client:load>
+    <RegisterForm onSubmit={async (payload) => {
+      try {
+        const res = await fetch('/api/auth/register', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+        });
+
+        const data = await res.json();
+        if (!res.ok) {
+          throw new Error(data?.error?.message || 'Rejestracja nie powiodła się');
+        }
+
+        // Inform the user that a confirmation email was sent by Supabase
+        // Redirect to login page with a query flag to show message
+        const params = new URLSearchParams();
+        params.set('registered', '1');
+        window.location.href = `/auth/login?${params.toString()}`;
+      } catch (err: any) {
+        throw err;
+      }
+    }} onSwitchToLogin={() => { window.location.href = '/auth/login'; }} />
+  </div>
+</AuthLayout>

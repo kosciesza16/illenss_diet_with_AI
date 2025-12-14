@@ -1,0 +1,25 @@
+---
+import LayoutHeader from '../components/LayoutHeader';
+const { children } = Astro.props;
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Recipe Assistant</title>
+  </head>
+  <body class="min-h-screen bg-gradient-to-br from-green-50 to-blue-50">
+    <div>
+      <!-- Header mounted client-side -->
+      <div client:load>
+        <LayoutHeader />
+      </div>
+
+      <main class="max-w-7xl mx-auto px-4 py-8 sm:px-6 lg:px-8">
+        {children}
+      </main>
+    </div>
+  </body>
+</html>
+

@@ -1,0 +1,12 @@
+---
+import React from 'react';
+import ForgotPasswordForm from '../../components/auth/ForgotPasswordForm';
+import AuthLayout from '../../components/auth/AuthLayout';
+---
+
+<AuthLayout title="Resetowanie hasła" subtitle="Wskaż email powiązany z kontem">
+  <div client:load>
+    <ForgotPasswordForm onSubmit={(payload) => { console.log('Forgot submit', payload); }} />
+  </div>
+</AuthLayout>
+

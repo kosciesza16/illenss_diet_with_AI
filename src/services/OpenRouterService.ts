@@ -149,16 +149,6 @@ export class OpenRouterService {
     this.systemMessage = message;
   }
 
-  // Public getter for system message (safe accessor used by other services)
-  public getSystemMessage(): string | null {
-    return this.systemMessage;
-  }
-
-  public setModel(modelName: string): void {
-    if (!modelName || typeof modelName !== 'string') throw new ValidationError('modelName must be a non-empty string');
-    this.defaultModel = modelName;
-  }
-
   public setParams(_params: Record<string, any>): void {
     // For now we support passing params per-call; this method can be used to set global defaults
     // Implement as needed (merge semantics) — placeholder to satisfy API in plan
@@ -361,3 +351,4 @@ export class OpenRouterService {
 }
 
 export default OpenRouterService;
+// ...existing code...
