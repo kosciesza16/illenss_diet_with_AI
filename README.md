@@ -141,6 +141,22 @@ Modify recipe with AI or calculations
 
 ## Testing
 
+### Automated Unit Testing
+
+This project uses the following tools for automated unit and component testing:
+
+- Vitest — fast unit test runner which integrates well with Vite and TypeScript.
+- @testing-library/react — utilities for testing React components from a user's perspective.
+- @testing-library/user-event — higher-level user interaction helpers for component tests.
+- @testing-library/jest-dom — custom DOM matchers to make assertions more readable.
+- msw (Mock Service Worker) — mock network requests in unit and integration tests so tests are deterministic and offline-safe.
+
+Recommendations:
+- Add npm scripts such as `test:unit` (Vitest watch) and `test:unit:ci` (single-run for CI).
+- Mock external APIs (Supabase, OpenRouter) with `msw` during tests to avoid network dependency.
+- Render components inside required providers (e.g. Supabase or Router providers) in test setup utilities.
+- Keep unit tests focused and fast; use integration tests sparingly for cross-service flows.
+
 ### Manual Test Scenario
 
 1. Create user: `test@example.com`

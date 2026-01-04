@@ -17,3 +17,15 @@ AI - Komunikacja z modelami przez usługę Openrouter.ai:
 CI/CD i Hosting:
 - Github Actions do tworzenia pipeline’ów CI/CD
 - DigitalOcean do hostowania aplikacji za pośrednictwem obrazu docker
+
+Testowanie jednostkowe i narzędzia powiązane:
+- Vitest — preferowany runner do testów jednostkowych i integracyjnych lekko związanych z Vite/Astro.
+- @testing-library/react — biblioteka do testowania komponentów React z punktu widzenia użytkownika.
+- msw (Mock Service Worker) — do mockowania żądań sieciowych (Supabase, OpenRouter) w testach jednostkowych i integracyjnych.
+- @testing-library/user-event — do symulacji interakcji użytkownika w testach.
+- @testing-library/jest-dom — rozszerzenia asercji DOM ułatwiające czytelną weryfikację wyników testów.
+
+Zalecenia:
+- Uruchamiać testy z `vitest` w trybie watch podczas developmentu, a w CI użyć pojedynczego przebiegu (CI mode).
+- Przygotować `test/setup.ts` do globalnej konfiguracji środowiska testowego (np. `msw` handlers, globalne matchery `jest-dom`, renderowanie w providerach).
+- Izolować komponenty i mockować zależności zewnętrzne (Supabase, OpenRouter) przy pomocy `msw` lub prostej strategii stubów.
